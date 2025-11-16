@@ -1,0 +1,59 @@
+/* Login component-specific overrides */
+
+.login-header {
+  background: linear-gradient(135deg, var(--primary-50), #ffffff);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.login-header-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-100);
+  color: var(--primary-700);
+  font-size: 1.2rem;
+  margin-bottom: var(--space-3);
+}
+
+.login-intro {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+}
+
+.login-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.login-remember {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-secondary);
+}
+
+.login-remember input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+}
+
+.login-link-button {
+  border: none;
+  background: none;
+  color: var(--primary-600);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.login-link-button:hover {
+  color: var(--primary-700);
+}

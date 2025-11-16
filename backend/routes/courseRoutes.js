@@ -1,22 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const courseController = require("../controllers/courseController");
+const { authenticate, authorizeRoles } = require("../middleware/authMiddleware");
 
-// Create
-router.post("/", courseController.createCourse);
+// All course routes require authentication
+router.use(authenticate);
 
-// Read All
+// Create (instructors and admins only)
+router.post("/", authorizeRoles("instructor", "admin"), courseController.createCourse);
+
+// Read All (any authenticated user)
 router.get("/", courseController.getCourses);
 
-// Read One
+// Read One (any authenticated user)
 router.get("/:id", courseController.getCourseById);
 
-// Update
-router.put("/:id", courseController.updateCourse);
+// Update (instructors and admins only)
+router.put("/:id", authorizeRoles("instructor", "admin"), courseController.updateCourse);
 
-// Delete
-router.delete("/:id", courseController.deleteCourse);
+// Delete (instructors and admins only)
+router.delete("/:id", authorizeRoles("instructor", "admin"), courseController.deleteCourse);
 
 module.exports = router;
-
-
