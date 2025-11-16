@@ -1,89 +1,84 @@
 # Learning Management System (LMS)
 
-A comprehensive full-stack Learning Management System built with React and Node.js, featuring modern UI/UX design and robust backend functionality.
+A full-stack Learning Management System built with **React** (frontend) and **Node.js/Express** (backend), featuring a modern UI and role-based access control for students, instructors, and admins.
 
-## 🚀 Features
+## 🚀 Core Features
 
-### Authentication & User Management
-- 🔐 Secure JWT-based authentication
-- 👥 Multi-role support (Students, Instructors, Admins)
+### Authentication & Roles
+- 🔐 JWT-based authentication
+- 👥 Roles: **Student**, **Instructor**, **Admin**
 - 🛡️ Password hashing with bcrypt
-- 🔑 Protected routes and API endpoints
+- 🔑 Protected API routes using middleware
 
 ### Course Management
-- 📚 Create and manage courses
-- 📝 Course enrollment system
-- 📊 Progress tracking
-- 🎯 Assignment and assessment tools
+- 📚 Create, edit, and delete courses (admin & instructor)
+- 🖼️ Support for course thumbnails, content links, and video URLs
+- 🌐 Courses exposed via REST API and consumed by the React frontend
 
-### Student Features
-- 📖 Browse and enroll in courses
-- 📈 Track learning progress
-- 💬 Interactive course materials
-- 🎫 Support ticket system
+### Dashboards
+- 🧑‍🎓 **Student dashboard**
+  - View available courses with media
+  - Edit basic profile details
+  - Open and manage support tickets
+- 🧑‍🏫 **Instructor dashboard**
+  - Quick access to course creation and listingn  - "My Courses" grid with thumbnails
+- 🧑‍💼 **Admin dashboard**
+  - Manage users (filter by role, delete)
+  - View and manage all support tickets with role & status filters
+  - Manage courses via the Courses page (add / edit / delete)
 
-### Instructor Features
-- 🏫 Course creation and management
-- 👨‍🎓 Student progress monitoring
-- 📋 Assignment grading
-- 📊 Analytics and reporting
+### Support Tickets
+- 🎫 Students can create, edit, and delete their own tickets
+- 📨 Tickets are tied to the authenticated user (userId, userName, userRole)
+- 🧮 Admins can see all tickets, filter by role & status, and update status
 
-### Support System
-- 🎫 Integrated support ticket system
-- 💬 Help desk functionality
-- 📞 Student-instructor communication
+---
 
 ## 🛠️ Technology Stack
 
 ### Frontend
-- **React 19.1.0** - Modern UI library
-- **React Router DOM 7.6.3** - Client-side routing
-- **Axios 1.10.0** - HTTP client
-- **Framer Motion 12.23.22** - Animations
-- **Lucide React 0.544.0** - Modern icons
-- **React Icons 5.5.0** - Icon library
+- **React 18+**
+- **React Router DOM 7+**
+- **Axios** for HTTP requests
+- **Framer Motion** for hero/feature animations
+- **React Icons / Lucide Icons** for iconography
 
 ### Backend
-- **Node.js** - Runtime environment
-- **Express 5.1.0** - Web framework
-- **MongoDB** - Database
-- **Mongoose 8.16.1** - ODM for MongoDB
-- **JWT** - Authentication tokens
-- **bcrypt 6.0.0** - Password hashing
-- **CORS 2.8.5** - Cross-origin resource sharing
-- **dotenv 17.0.1** - Environment variables
+- **Node.js** / **Express**
+- **MongoDB** with **Mongoose**
+- **jsonwebtoken (JWT)** for auth
+- **bcrypt** for password hashing
+- **cors**, **dotenv**
 
-### Development Tools
-- **Nodemon 3.1.10** - Development server
-- **React Scripts 5.0.1** - Build tools
+### Tooling
+- **Nodemon** for backend dev
+- **Create React App** toolchain (React Scripts) for frontend
+
+---
 
 ## 📋 Prerequisites
 
-Before running this project, make sure you have the following installed:
+- Node.js (v16+ recommended)
+- npm
+- MongoDB instance (local or Atlas)
+- Git
 
-- **Node.js** (v14 or higher)
-- **npm** (v6 or higher)
-- **MongoDB** (local installation or MongoDB Atlas account)
-- **Git**
+---
 
 ## 🔧 Installation & Setup
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/shabaabhanaan/LearningManagementSystem.git
 cd "Learning Management System"
 ```
 
 ### 2. Backend Setup
 ```bash
-# Navigate to backend directory
 cd backend
-
-# Install dependencies
 npm install
 
-# Environment Configuration
-# Create .env file with the following variables:
+# .env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
@@ -91,195 +86,143 @@ JWT_SECRET=your_jwt_secret_key
 
 ### 3. Frontend Setup
 ```bash
-# Navigate to frontend directory
 cd ../frontend
-
-# Install dependencies
 npm install
 ```
 
-### 4. Database Setup
-- Ensure MongoDB is running locally, or
-- Set up MongoDB Atlas and update the `MONGO_URI` in your `.env` file
+### 4. Optional: Seed Sample Data
 
-## 🚀 Running the Application
-
-### Development Mode
-
-#### Start Backend Server
-```bash
-# In the backend directory
-cd backend
-npm start
-# or for development with auto-reload
-npx nodemon index.js
-```
-The backend server will run on `http://localhost:5000`
-
-#### Start Frontend Application
-```bash
-# In the frontend directory
-cd frontend
-npm start
-```
-The frontend application will run on `http://localhost:3000`
-
-### Production Mode
-```bash
-# Build frontend for production
-cd frontend
-npm run build
-
-# Start backend server
-cd ../backend
-npm start
-```
-
-## 📁 Project Structure
-
-```
-Learning Management System/
-├── backend/
-│   ├── models/           # Database models
-│   ├── routes/           # API routes
-│   ├── middleware/       # Custom middleware
-│   ├── controllers/      # Route controllers
-│   ├── config/          # Configuration files
-│   ├── .env             # Environment variables
-│   ├── index.js         # Main server file
-│   └── package.json     # Backend dependencies
-├── frontend/
-│   ├── public/          # Static files
-│   ├── src/
-│   │   ├── components/  # Reusable components
-│   │   ├── pages/       # Page components
-│   │   ├── hooks/       # Custom hooks
-│   │   ├── utils/       # Utility functions
-│   │   ├── api.js       # API configuration
-│   │   ├── App.js       # Main app component
-│   │   └── index.js     # Entry point
-│   └── package.json     # Frontend dependencies
-└── README.md           # Project documentation
-```
-
-## 🔌 API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `POST /api/auth/logout` - User logout
-
-### Courses
-- `GET /api/courses` - Get all courses
-- `POST /api/courses` - Create new course
-- `GET /api/courses/:id` - Get course by ID
-- `PUT /api/courses/:id` - Update course
-- `DELETE /api/courses/:id` - Delete course
-
-### Students
-- `GET /api/students` - Get all students
-- `POST /api/students` - Create student
-- `GET /api/students/:id` - Get student by ID
-- `PUT /api/students/:id` - Update student
-
-### Instructors
-- `GET /api/instructors` - Get all instructors
-- `POST /api/instructors` - Create instructor
-- `GET /api/instructors/:id` - Get instructor by ID
-- `PUT /api/instructors/:id` - Update instructor
-
-### Support Tickets
-- `GET /api/tickets` - Get all tickets
-- `POST /api/tickets` - Create new ticket
-- `GET /api/tickets/:id` - Get ticket by ID
-- `PUT /api/tickets/:id` - Update ticket status
-
-## 🎨 UI/UX Features
-
-- **Responsive Design** - Works on all device sizes
-- **Modern Animations** - Smooth transitions with Framer Motion
-- **Intuitive Navigation** - Easy-to-use interface
-- **Accessible Components** - WCAG compliance
-- **Dark/Light Mode** - Theme switching support
-
-## 🧪 Testing
+In `backend/` you can populate the database with sample data:
 
 ```bash
-# Run frontend tests
-cd frontend
-npm test
+# Seed courses
+node scripts/seedCourses.js
 
-# Run backend tests (if implemented)
-cd backend
-npm test
+# Seed users (admin/instructor/students) and tickets
+node scripts/seedUsersAndTickets.js
 ```
 
-## 🔒 Security Features
-
-- JWT token-based authentication
-- Password encryption with bcrypt
-- CORS protection
-- Input validation and sanitization
-- Protected API routes
-- Secure environment variable handling
-
-## 📱 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the ISC License.
-
-## 👥 Authors
-
-- **Your Name** - Initial work
-
-## 🆘 Support
-
-For support, please create an issue in the repository or contact the development team.
-
-## 🚀 Deployment
-
-### Heroku Deployment
-1. Create a Heroku app
-2. Add MongoDB Atlas connection string
-3. Set environment variables
-4. Deploy backend and build frontend
-
-### Netlify/Vercel (Frontend)
-1. Build the frontend (`npm run build`)
-2. Deploy the build folder
-3. Configure API endpoints
-
-### MongoDB Atlas
-1. Create a cluster
-2. Set up database user
-3. Whitelist IP addresses
-4. Get connection string
-
-## 📈 Future Enhancements
-
-- [ ] Real-time messaging system
-- [ ] Video conferencing integration
-- [ ] Advanced analytics dashboard
-- [ ] Mobile application
-- [ ] Offline course support
-- [ ] Multi-language support
-- [ ] Advanced assessment tools
-- [ ] Integration with external LTI tools
+> Default seeded credentials (from `seedUsersAndTickets.js`):
+> - admin@example.com / **Password123!**
+> - instructor1@example.com / **Password123!**
+> - student1@example.com / **Password123!**
 
 ---
 
-**Happy Learning! 🎓**
+## 🚀 Running the Application
+
+### Start Backend
+```bash
+cd backend
+npm start
+# or
+npx nodemon index.js
+```
+Backend: `http://localhost:5000`
+
+### Start Frontend
+```bash
+cd frontend
+npm start
+```
+Frontend: `http://localhost:3000`
+
+---
+
+## 📁 Project Structure
+
+```text
+Learning Management System/
+├── backend/
+│   ├── models/            # User, Course, Ticket schemas
+│   ├── routes/            # auth, courses, students, instructors, tickets
+│   ├── controllers/       # Auth & course controllers
+│   ├── middleware/        # authMiddleware (authenticate/authorizeRoles)
+│   ├── scripts/           # seedCourses, seedUsersAndTickets
+│   ├── app.js             # Express app (for tests)
+│   ├── index.js           # Server bootstrap
+│   └── package.json
+├── frontend/
+│   ├── public/
+│   └── src/
+│       ├── components/    # Navbar, Login/Register, CourseList, etc.
+│       ├── pages/
+│       │   ├── Home.jsx   # Marketing/hero + features
+│       │   └── Dashboard/ # Admin/Instructor/Student dashboards
+│       ├── api.js         # Axios instance with base URL & auth header
+│       ├── App.jsx        # App routes
+│       ├── index.js       # React entry point
+│       └── components.css # Design system (buttons, cards, forms)
+└── README.md
+```
+
+---
+
+## 🔌 Key API Endpoints
+
+### Auth
+- `POST /api/auth/register` – Register a new user
+- `POST /api/auth/login` – Login and receive JWT
+- `GET /api/auth/users` – List all users (admin only)
+- `DELETE /api/auth/users/:id` – Delete user (admin only)
+
+### Courses
+- `GET /api/courses` – List courses (auth required)
+- `POST /api/courses` – Create course (admin/instructor)
+- `GET /api/courses/:id` – Get course by id
+- `PUT /api/courses/:id` – Update course (admin/instructor)
+- `DELETE /api/courses/:id` – Delete course (admin/instructor)
+
+### Tickets
+- `GET /api/tickets` –
+  - Admin: all tickets
+  - Other roles: own tickets only
+- `POST /api/tickets` – Create ticket
+- `PUT /api/tickets/:id` – Update ticket (subject/message/status)
+- `DELETE /api/tickets/:id` – Delete ticket
+
+---
+
+## 🎨 UI/UX Highlights
+
+- Responsive layout with sticky navbar
+- Modern hero section with gradients and animations
+- Role badge in navbar (Student / Instructor / Admin)
+- Card-based dashboards and ticket tables
+- Consistent button & form styling via `components.css`
+
+---
+
+## 🧪 Testing
+
+Backend includes a small Jest + Supertest example for the Express app (`backend/tests/app.test.js`). Frontend uses CRA’s Jest setup:
+
+```bash
+# Frontend tests
+cd frontend
+npm test
+
+# Backend tests
+cd backend
+npm test
+```
+
+---
+
+## 🤝 Contributing
+
+1. Fork this repository
+2. Create a feature branch: `git checkout -b feature/my-feature`
+3. Commit changes: `git commit -m "Add my feature"`
+4. Push branch: `git push origin feature/my-feature`
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is currently distributed under the **ISC** license (see package.json).
+
+---
+
+**Happy learning with LearningHub! 🎓**
